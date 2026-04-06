@@ -1,11 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DES 157B Spring 2026</title>
+    <!-- Normalize Script -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- My Styles -->
+    <link href="styles.css" rel="stylesheet">
+
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
 </head>
+
 <body>
-    <h1>DES 157B SP 2026</h1>
+
+    <div id="portal" class="mauka-active">
+
+        <!-- ── STAGE ── -->
+        <div id="stage">
+
+            <!-- Mauka background (always behind) -->
+            <div class="bg-mauka"></div>
+
+            <!-- Makai background (clips in over the top on transition) -->
+            <div class="bg-makai"></div>
+
+
+            <!-- Animation layers -->
+            <div class="ripple-overlay" id="rippleLayer"></div>
+            <div class="curtain" id="curtain"></div>
+            <div class="shimmer-line" id="shimmerLine"></div>
+        </div>
+
+        <!-- ── PORTAL INNER ── -->
+        <div class="portal-inner">
+
+            <!-- LEFT PANEL -->
+            <div class="left-panel">
+                <div>
+                    <div class="logo-row">
+                        <div class="logo-mark">DES 157B · Interactive Media III · Spring 2026</div>
+                    </div>
+                    <h1 class="course-title">Derick Lapurga<br>Portal</h1>
+                    <p class="course-sub">Spring 2026 · Portfolio</p>
+                </div>
+
+                <div class="rule"></div>
+
+                <div class="theme-pill">
+                    <div class="pill-dot"></div>
+                    <span class="pill-label" id="pill-label">Mauka — Mountain Side</span>
+                </div>
+
+                <div class="switch-wrap">
+                    <div class="switch-track" id="switchTrack" onclick="toggleTheme(event)">
+                        <div class="sw-thumb" id="sw-thumb"></div>
+                        <span class="sw-label">Mauka</span>
+                        <span class="sw-label">Makai</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL -->
+            <div class="right-panel">
+                <div class="panel-hdr">
+                    <span class="panel-title">Projects</span>
+                </div>
+                <div class="assignments">
+
+                    <div class="card">
+                        <div class="card-num">01 · Ministudios</div>
+                        <div class="card-title">Mini Studios</div>
+                        <div class="card-desc">
+                            <a href="#">Blockbuster Video</a>
+                            <a href="#">Check Yourself</a>
+                            <a href="#">Library Liberty</a>
+                        <div class="card-title" id="toolkit">Toolkit</div>
+                            <a href="#">Friends List</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-num">02 · Resarch</div>
+                        <div class="card-title">Research</div>
+                        <div class="card-desc">
+                            <a href="#">Brainstorm</a>
+                            <a href="#">Cooperative Analysis</a>
+                            <a href="#">Annotated Bibliography</a>
+                            <a href="#">Feasibility Report</a>
+                            <a href="#">Usability Results</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-num">03 · Development</div>
+                        <div class="card-title">Development</div>
+                        <div class="card-desc">
+                            <a href="#">Proposal</a>
+                            <a href="#">Sketches</a>
+                            <a href="#">User Flows</a>
+                            <a href="#">Design Progress</a>
+                            <a href="#">LoFi Sketches</a>
+                            <a href="#">Version 1</a>
+                            <a href="#">Usability Testing</a>
+                            <a href="#">Version 2</a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-num">04 · Capstone</div>
+                        <div class="card-title">Capstone</div>
+                        <div class="card-desc">
+                            <a href="#">Proposal</a>
+                            <a href="#">Sketches</a>
+                            <a href="#">User Flows</a>
+                            <a href="#">Design Progress</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </body>
+
 </html>

@@ -1,0 +1,386 @@
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #050c0a;
+}
+
+#portal {
+  width: 1200px;
+  height: 750px;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Figtree', sans-serif;
+}
+
+/* ── STAGE ── */
+#stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* ── PNG BACKGROUND LAYERS ── */
+/* Both images sit stacked; the curtain wipe reveals makai on top */
+
+.bg-mauka {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/Mauka.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.bg-makai {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/Makai.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+  /* Hidden by curtain clip until transition fires */
+  clip-path: ellipse(0% 60% at 0% 50%);
+  transition: clip-path 0.55s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+/* When portal has .reveal, makai bg is fully exposed */
+#portal.reveal .bg-makai {
+  clip-path: ellipse(160% 120% at 110% 50%);
+}
+
+
+/* ── RIPPLE OVERLAY ── */
+.ripple-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 20;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0.14;
+  animation: rippleOut 0.9s cubic-bezier(0.2, 0, 0.5, 1) forwards;
+}
+@keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
+
+/* ── CURTAIN WIPE ── */
+/* Sits above bg layers, carries the incoming bg color during the sweep,
+   then exits — the bg-makai clip-path handles the persistent state */
+
+   .curtain {
+  position: absolute; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  z-index: 18; 
+  pointer-events: none;
+  clip-path: ellipse(0% 60% at 0% 50%);
+  transition: clip-path 0.55s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.curtain.sweeping { 
+    clip-path: ellipse(160% 120% at 50% 50%); 
+}
+
+/* ── SHIMMER LINE ── */
+.shimmer-line {
+  position: absolute; top: 0; bottom: 0;
+  width: 3px; opacity: 0; pointer-events: none; z-index: 19;
+  transition: none;
+}
+
+/* ── LAYOUT ── */
+.portal-inner {
+  position: relative; z-index: 10;
+  display: flex; gap: 24px; padding: 30px 28px;
+  height: 750px; align-items: stretch;
+}
+
+/* ── LEFT PANEL ── */
+.left-panel { 
+    flex: 0 0 248px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; }
+
+.logo-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 2px; 
+}
+
+.logo-mark {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  font-size: 11px; 
+  font-weight: 500; 
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+}
+
+.course-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 45px; 
+  font-weight: 300;
+  line-height: 1.2; 
+  color: #fff; 
+  letter-spacing: 0.3px; 
+  margin-top: 180px;
+}
+
+.course-sub {
+  font-size: 11.5px; 
+  color: rgba(255,255,255,0.32);
+  margin-top: 5px; 
+  letter-spacing: 0.4px; 
+  font-weight: 300;
+}
+
+.rule { 
+    height: 1px; 
+    background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent); }
+
+/* ── THEME PILL ── */
+.theme-pill {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px;
+  padding: 7px 13px 7px 9px; 
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  width: fit-content;
+}
+.pill-dot {
+  width: 7px; 
+  height: 7px; 
+  border-radius: 50%;
+  transition: background 0.6s ease; 
+  flex-shrink: 0;
+}
+.mauka-active .pill-dot { 
+    background: #6aab82; 
+}
+
+.makai-active .pill-dot { 
+    background: #4aaed8; 
+}
+
+.pill-label { 
+    font-size: 11px; 
+    font-weight: 400; 
+    color: rgba(255,255,255,0.6); 
+    letter-spacing: 0.5px; }
+
+/* ── SWITCH ── */
+.switch-wrap { 
+    margin-top: auto; 
+}
+
+.switch-track {
+  width: 100%; 
+  height: 42px; 
+  border-radius: 100px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative; 
+  display: flex; 
+  align-items: center; 
+  overflow: hidden;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.switch-track:hover { 
+    border-color: rgba(255,255,255,0.2); 
+}
+
+.sw-thumb {
+  position: absolute; 
+  top: 4px; 
+  bottom: 4px;
+  width: calc(50% - 5px); 
+  border-radius: 100px;
+  transition: left 0.6s cubic-bezier(.86,0,.07,1), background 0.6s ease;
+  pointer-events: none;
+}
+
+.mauka-active .sw-thumb { 
+    left: 5px; 
+    background: rgba(74,124,90,0.75); 
+}
+
+.makai-active .sw-thumb { 
+    left: calc(50%); 
+    background: rgba(14,84,144,0.8); 
+}
+
+.sw-label {
+  flex: 1; 
+  text-align: center; 
+  font-size: 10.5px; 
+  font-weight: 500;
+  letter-spacing: 1.5px; 
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3); 
+  position: relative; 
+  z-index: 1;
+  transition: color 0.4s ease; 
+  user-select: none;
+}
+
+.mauka-active .sw-label:first-of-type,
+.makai-active .sw-label:last-of-type { 
+color: rgba(255,255,255,0.88); 
+}
+
+/* ── RIGHT PANEL ── */
+.right-panel { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
+
+.panel-hdr { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.panel-title {
+  font-size: 9.5px; 
+  font-weight: 500; 
+  letter-spacing: 3.5px;
+  text-transform: uppercase; 
+  color: rgba(255,255,255,0.28);
+  display:flex;
+  justify-content: end;
+  margin-left:auto;
+}
+
+
+/* ── CARDS ── */
+.assignments { 
+    display: grid; 
+    grid-template-columns: 300px 300px; 
+    gap: 12px; 
+    flex: 1; 
+    justify-content: end;
+}
+
+.card {
+  border-radius: 14px; 
+  padding: 12px 14px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  display: flex; 
+  flex-direction: column; 
+  gap: 9px;
+  height: 310px;
+  position: relative; 
+  overflow: hidden;
+  transition: background 0.28s ease, border-color 0.28s ease,
+              transform 0.28s ease, box-shadow 0.28s ease;
+  backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+}
+
+.card::before {
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: 16px; 
+  right: 16px; 
+  height: 1px;
+  transition: background 0.6s ease;
+}
+
+.mauka-active .card::before {
+  background: linear-gradient(90deg, transparent, rgba(106,171,130,0.6), transparent);
+}
+
+.makai-active .card::before {
+  background: linear-gradient(90deg, transparent, rgba(74,174,216,0.6), transparent);
+}
+
+.card-num {
+  font-size: 9px; 
+  font-weight: 500; 
+  letter-spacing: 2px;
+  text-transform: uppercase; 
+  color: rgba(255,255,255,0.2);
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; 
+  font-weight: 400;
+  color: rgba(255,255,255,0.9); 
+  line-height: 1.3;
+}
+.card-desc {
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+    flex: 1; 
+}
+
+.card-desc a {
+  font-size: 13px; 
+  font-weight: 300; 
+  line-height: 1.5;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 2px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.card-desc a:last-child { 
+    border-bottom: none; 
+}
+
+.card-desc a::before {
+  /* content: '→ '; */
+  content: '\f186';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  opacity: 0;
+  transition: opacity 0.2s ease; 
+  font-size: 10px;
+}
+
+.card-desc a:hover::before { 
+    opacity: 1; 
+}
+
+.mauka-active .card-desc a:hover { 
+    color: #6aab82; 
+}
+
+.makai-active .card-desc a:hover { 
+    color: #4aaed8; 
+}
+
+#toolkit{
+    margin-top: 20px;
+}
