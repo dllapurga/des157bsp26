@@ -1,5 +1,9 @@
 /* ── RESET & BASE ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
 
 html, body {
   width: 100%;
@@ -19,15 +23,11 @@ html, body {
   font-family: 'Figtree', sans-serif;
 }
 
-/* ── STAGE ── */
 #stage {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
-
-/* ── PNG BACKGROUND LAYERS ── */
-/* Both images sit stacked; the curtain wipe reveals makai on top */
 
 .bg-mauka {
   position: absolute;
@@ -45,22 +45,21 @@ html, body {
   background-size: cover;
   background-position: center;
   z-index: 2;
-  /* Hidden by curtain clip until transition fires */
+
   clip-path: ellipse(0% 60% at 0% 50%);
   transition: clip-path 0.55s cubic-bezier(0.77, 0, 0.18, 1);
 }
 
-/* When portal has .reveal, makai bg is fully exposed */
 #portal.reveal .bg-makai {
   clip-path: ellipse(160% 120% at 110% 50%);
 }
 
 
-/* ── RIPPLE OVERLAY ── */
 .ripple-overlay {
   position: absolute; inset: 0; pointer-events: none; z-index: 20;
   overflow: hidden;
 }
+
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -70,9 +69,6 @@ html, body {
 }
 @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
 
-/* ── CURTAIN WIPE ── */
-/* Sits above bg layers, carries the incoming bg color during the sweep,
-   then exits — the bg-makai clip-path handles the persistent state */
 
    .curtain {
   position: absolute; 
@@ -90,21 +86,20 @@ html, body {
     clip-path: ellipse(160% 120% at 50% 50%); 
 }
 
-/* ── SHIMMER LINE ── */
+
 .shimmer-line {
   position: absolute; top: 0; bottom: 0;
   width: 3px; opacity: 0; pointer-events: none; z-index: 19;
   transition: none;
 }
 
-/* ── LAYOUT ── */
+
 .portal-inner {
   position: relative; z-index: 10;
   display: flex; gap: 24px; padding: 30px 28px;
   height: 750px; align-items: stretch;
 }
 
-/* ── LEFT PANEL ── */
 .left-panel { 
     flex: 0 0 248px; 
     display: flex; 
@@ -151,7 +146,7 @@ html, body {
     height: 1px; 
     background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent); }
 
-/* ── THEME PILL ── */
+
 .theme-pill {
   display: inline-flex; 
   align-items: center; 
@@ -183,7 +178,7 @@ html, body {
     color: rgba(255,255,255,0.6); 
     letter-spacing: 0.5px; }
 
-/* ── SWITCH ── */
+
 .switch-wrap { 
     margin-top: auto; 
 }
@@ -245,7 +240,7 @@ html, body {
 color: rgba(255,255,255,0.88); 
 }
 
-/* ── RIGHT PANEL ── */
+
 .right-panel { 
     flex: 1; 
     display: flex; 
@@ -271,7 +266,6 @@ color: rgba(255,255,255,0.88);
 }
 
 
-/* ── CARDS ── */
 .assignments { 
     display: grid; 
     grid-template-columns: 300px 300px; 
