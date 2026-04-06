@@ -9,7 +9,7 @@ html, body {
 }
 
 #portal {
-  width: 1200px;
+  width: 100vw;
   height: 750px;
   overflow: hidden;
   position: absolute;

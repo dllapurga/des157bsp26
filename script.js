@@ -1,4 +1,3 @@
-
 let isMakai = false;
 let animating = false;
 
