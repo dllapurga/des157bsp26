@@ -70,7 +70,7 @@ html, body {
 @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
 
 
-   .curtain {
+.curtain {
   position: absolute; 
   top: 0; 
   left: 0;
@@ -126,12 +126,12 @@ html, body {
 
 .course-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 45px; 
+  font-size: 50px; 
   font-weight: 300;
   line-height: 1.2; 
   color: #fff; 
   letter-spacing: 0.3px; 
-  margin-top: 180px;
+  margin-top: 170px;
 }
 
 .course-sub {
