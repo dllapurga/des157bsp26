@@ -15,7 +15,8 @@ body {
 h1 {
   position: absolute;
   z-index: 10;
-  color:rgb(255, 187, 0);
+  color:rgb(255, 179, 0);
   font-family: 'Cormorant Garamond', serif;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; 
+  font-size:3em;
 }
