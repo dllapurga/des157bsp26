@@ -1,8 +1,8 @@
-(function () {
+// (function () {
 
-'use strict';
+// 'use strict';
 
-console.log('reading js');
+// console.log('reading js');
 
 let isMakai = false;
 let animating = false;
@@ -77,4 +77,4 @@ function toggleTheme(e) {
   }, 1100);
 }
 
-})();
+// })();
