@@ -56,7 +56,6 @@
       letter-spacing: 0.12em;
     }
 
-    /* Day buttons */
     .days-grid {
       display: grid;
       grid-template-columns: repeat(8, 1fr);
@@ -120,7 +119,6 @@
       line-height: 1;
     }
 
-    /* Language dot indicators on day buttons */
     .day-dots {
       display: flex;
       gap: 2px;
@@ -136,7 +134,6 @@
       opacity: 0.7;
     }
 
-    /* Detail panel */
     .detail-panel {
       background: #fff8ee;
       border: 1px solid #e8dccb;
