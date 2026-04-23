@@ -1,0 +1,52 @@
+{
+  "days": [
+    {
+      "label": "Mon",
+      "date": "Apr 13",
+      "full": "Monday, April 13",
+      "languages": ["English", "Cantonese"]
+    },
+    {
+      "label": "Tue",
+      "date": "Apr 14",
+      "full": "Tuesday, April 14",
+      "languages": ["English", "Cantonese"]
+    },
+    {
+      "label": "Wed",
+      "date": "Apr 15",
+      "full": "Wednesday, April 15",
+      "languages": ["English", "Cantonese", "Tagalog"]
+    },
+    {
+      "label": "Thu",
+      "date": "Apr 16",
+      "full": "Thursday, April 16",
+      "languages": ["English"]
+    },
+    {
+      "label": "Fri",
+      "date": "Apr 17",
+      "full": "Friday, April 17",
+      "languages": ["English", "Hawaiian"]
+    },
+    {
+      "label": "Sat",
+      "date": "Apr 18",
+      "full": "Saturday, April 18",
+      "languages": ["English", "Tagalog"]
+    },
+    {
+      "label": "Sun",
+      "date": "Apr 19",
+      "full": "Sunday, April 19",
+      "languages": ["English", "Cantonese", "Tagalog"]
+    },
+    {
+      "label": "Mon",
+      "date": "Apr 20",
+      "full": "Monday, April 20",
+      "languages": ["English", "Cantonese"]
+    }
+  ]
+}

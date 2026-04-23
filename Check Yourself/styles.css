@@ -1,0 +1,289 @@
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #faf6ef;
+      color: #2e2a22;
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grain overlay */
+    /* body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    } */
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .header-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #a07c2e;
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 400;
+      color: #2e2a22;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: #b8892a;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #9a8f7e;
+      letter-spacing: 0.12em;
+    }
+
+    /* Day buttons */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+
+    .day-btn {
+      background: #fff8ee;
+      border: 1px solid #e8dccb;
+      border-radius: 6px;
+      color: #9a8f7e;
+      cursor: pointer;
+      padding: 12px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #c9a84c, transparent);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+
+    .day-btn:hover {
+      border-color: #c8b89a;
+      color: #2e2a22;
+      transform: translateY(-2px);
+    }
+
+    .day-btn.active {
+      border-color: #a07c2e;
+      color: #2e2a22;
+      background: #fdf0d5;
+    }
+
+    .day-btn.active::after {
+      opacity: 0.06;
+    }
+
+    .day-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .day-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    /* Language dot indicators on day buttons */
+    .day-dots {
+      display: flex;
+      gap: 2px;
+      margin-top: 2px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .day-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      opacity: 0.7;
+    }
+
+    /* Detail panel */
+    .detail-panel {
+      background: #fff8ee;
+      border: 1px solid #e8dccb;
+      border-radius: 10px;
+      padding: 32px;
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #c9a84c, transparent);
+      opacity: 0.6;
+    }
+
+    .panel-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 136px;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease 0.1s forwards;
+    }
+
+    .panel-empty .arrow {
+      font-size: 24px;
+      color: #c8b89a;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .panel-empty p {
+      font-size: 11px;
+      color: #c8b89a;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .panel-content {
+      display: none;
+      animation: slideUp 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .panel-content.visible {
+      display: block;
+    }
+
+    .panel-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #2e2a22;
+      margin-bottom: 6px;
+    }
+
+    .panel-sublabel {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: #a07c2e;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .lang-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      animation: slideUp 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
+    .lang-item:nth-child(1) { animation-delay: 0.04s; }
+    .lang-item:nth-child(2) { animation-delay: 0.09s; }
+    .lang-item:nth-child(3) { animation-delay: 0.14s; }
+    .lang-item:nth-child(4) { animation-delay: 0.19s; }
+
+    .lang-pip {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lang-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #2e2a22;
+      flex: 1;
+    }
+
+    .lang-tag {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+      opacity: 0.8;
+    }
+
+    .divider {
+      height: 1px;
+      background: #e8dccb;
+      margin: 28px 0 20px;
+    }
+
+    .lang-count {
+      font-size: 10px;
+      color: #9a8f7e;
+      letter-spacing: 0.15em;
+    }
+
+    .lang-count span {
+      color: #b8892a;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-5px); }
+    }
