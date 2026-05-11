@@ -1,39 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capstone Project Proposal</title>
-     <!-- Normalize Script -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-   
-    <!-- My Styles -->
-    <link href="styles.css" rel="stylesheet">
 
+    <!-- Normalize CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <h1>Capstone Project Proposal</h1>
 
-    <h2>Topic Brief</h2>
-    <p>My capstone project is an interactive website that serves as a virtual recipe archive, allowing people to preserve and share the recipes passed down through their grandparents and families. At its core, the project explores how food functions not only as nourishment, but as a living connection to culture, memory, and cultural identity.</p>
-    <p>As the child and grandchild of immigrants in America, I have grown up with access to the flavors and dishes that shaped my family’s history. When I crave these foods, there are still relatives who know how to prepare them. But I often think about future generations of my family—third, fourth, or even fifth generation descendants—who may no longer have that cultural connection. While cultural foods can still be found in restaurants, they can never fully replicate the method, flavor, intimacy, history, and care embedded in recipes that have been prepared within a family for generations.</p>
-    <p>Food is one of the most enduring expressions of cultural identity, yet recipes are fragile forms of knowledge. Many are never formally written down and instead survive through memory, routine, and shared experience. As generations pass, these culinary traditions risk disappearing, taking with them the stories, emotions, and histories tied to them. This project aims to preserve those recipes before they are lost to time, creating a digital space where future generations can reconnect with the flavors, memories, and cultural legacies of their families. </p>
+    <main>
 
-    <h2>Design Lense</h2>
-    <p>I believe the lens my project is most applicable to is speculative design. My project imagines a future problem: the gradual loss of cultural memory and family recipes across generations of immigrants and diasporic families. Rather than simply creating a recipe website, it’s a speculative response to cultural erasure by asking: What happens when family knowledge disappears? and How can digital spaces preserve intangible heritage? The project uses design to explore emotional, cultural, and intergenerational futures.</p>
+        <header>
+            <h1>Capstone Project Proposal</h1>
+        </header>
 
-    <h2>Features</h2>
-    <ul>
-        <li>View overall recipe album</li>
-        <li>Adding recipes through a brief form inputting name of dish, ingredients, steps<li>
-        <li>Switch through recipes in a circular scroll</li>
-        <li>Write and view the memories associated with this dish</li>
-        <li>Perhaps upload photos</li>
-        <li>Ideal Feature: Input a photo and have AI mask the plate and upscale the photo</li>
-    </ul>
+        <section>
+            <h2>Topic Brief</h2>
 
-     <h2>Challenges</h2>
-     <p>One of the challenges that I foresee is creating the scroll move in a circular motion. I'm pretty sure it could be just playing around with positioning animations and javascript to promot this interaction, but I'm not 100% certain about the logistics. Ideally, in a perfect world, I would want to prompt the viewer to take an aerial photo of their dish and then have "AI" mask their photo so that it becomes the thumbnail for the recipe. That way all the thumbnails can be uniform. I think they could either drag and drop the photo or choose to upload it from files. Obviously because making that a real functioning concept is above my ability, I'm wondering if there's a way I can simulate this or make it <i>look</i> as if it's functioning this way.</p>
+            <p>
+                My capstone project is an interactive website that serves as a virtual recipe archive,
+                allowing people to preserve and share recipes passed down through their grandparents
+                and families. At its core, the project explores how food functions not only as
+                nourishment, but also as a living connection to culture, memory, and identity.
+            </p>
+
+            <p>
+                As the child and grandchild of immigrants in America, I have grown up with access
+                to the flavors and dishes that shaped my family’s history. When I crave these foods,
+                there are still relatives who know how to prepare them. However, I often think about
+                future generations of my family—third, fourth, or even fifth generation descendants—
+                who may no longer have that same cultural connection.
+            </p>
+
+            <p>
+                While cultural foods can still be found in restaurants, they can never fully replicate
+                the intimacy, history, care, and generational knowledge embedded in family recipes.
+                Food is one of the most enduring expressions of cultural identity, yet recipes are
+                fragile forms of knowledge. Many are never formally written down and instead survive
+                through memory, routine, and shared experience.
+            </p>
+
+            <p>
+                As generations pass, these culinary traditions risk disappearing, taking with them
+                the stories, emotions, and histories tied to them. This project aims to preserve
+                those recipes before they are lost to time, creating a digital space where future
+                generations can reconnect with the flavors, memories, and cultural legacies of
+                their families.
+            </p>
+        </section>
+
+        <section>
+            <h2>Design Lens</h2>
+
+            <p>
+                I believe the lens most applicable to my project is speculative design. The project
+                imagines a future problem: the gradual loss of cultural memory and family recipes
+                across generations of immigrants and diasporic families.
+            </p>
+
+            <p>
+                Rather than simply creating a recipe website, the project acts as a speculative
+                response to cultural erasure by asking: What happens when family knowledge disappears?
+                How can digital spaces preserve intangible heritage?
+            </p>
+
+            <p>
+                Through this lens, the project uses design to explore emotional, cultural, and
+                intergenerational futures.
+            </p>
+        </section>
+
+        <section>
+            <h2>Features</h2>
+
+            <ul>
+                <li>Browse a virtual recipe archive</li>
+                <li>Add recipes through a form input</li>
+                <li>Include dish name, ingredients, and preparation steps</li>
+                <li>Navigate recipes through a circular scrolling interaction</li>
+                <li>Write and view memories associated with each dish</li>
+                <li>Upload family or food photographs</li>
+                <li>
+                    Ideal feature: upload a photo and use AI masking/upscaling to create
+                    consistent recipe thumbnails
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Challenges</h2>
+
+            <p>
+                One challenge I foresee is creating the circular scrolling interaction.
+                I believe it may involve experimenting with positioning, animation,
+                and JavaScript logic, though I am still exploring the technical process.
+            </p>
+
+            <p>
+                Another challenge is implementing the AI-assisted image masking feature.
+                Ideally, users would upload an aerial photograph of their dish, and the
+                system would automatically isolate the plate and transform it into a
+                uniform recipe thumbnail.
+            </p>
+
+            <p>
+                Since creating a fully functional AI system is beyond the scope of my
+                current abilities, I am considering ways to simulate the interaction
+                or visually suggest the effect without requiring actual machine learning.
+            </p>
+        </section>
+
+    </main>
 
 </body>
+
 </html>
