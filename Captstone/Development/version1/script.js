@@ -88,26 +88,26 @@
 
   /* ─── LOCAL STORAGE ───────────────────────────────────────────── */
 
-  function saveToStorage(name, ingredients, steps, image) {
-    localStorage.setItem('hinabi_recipeName',  name);
-    localStorage.setItem('hinabi_ingredients', JSON.stringify(ingredients));
-    localStorage.setItem('hinabi_steps',       JSON.stringify(steps));
-    localStorage.setItem('hinabi_image',       image || '');
-  }
+//   function saveToStorage(name, ingredients, steps, image) {
+//     localStorage.setItem('hinabi_recipeName',  name);
+//     localStorage.setItem('hinabi_ingredients', JSON.stringify(ingredients));
+//     localStorage.setItem('hinabi_steps',       JSON.stringify(steps));
+//     localStorage.setItem('hinabi_image',       image || '');
+//   }
 
-  function loadFromStorage() {
-    const name        = localStorage.getItem('hinabi_recipeName');
-    const ingredients = JSON.parse(localStorage.getItem('hinabi_ingredients') || 'null');
-    const steps       = JSON.parse(localStorage.getItem('hinabi_steps')       || 'null');
-    const image       = localStorage.getItem('hinabi_image') || null;
+//   function loadFromStorage() {
+//     const name        = localStorage.getItem('hinabi_recipeName');
+//     const ingredients = JSON.parse(localStorage.getItem('hinabi_ingredients') || 'null');
+//     const steps       = JSON.parse(localStorage.getItem('hinabi_steps')       || 'null');
+//     const image       = localStorage.getItem('hinabi_image') || null;
 
-    if (name) {
-      uploadedImage  = image || null;
-      if (ingredients) ingredientRows = ingredients;
-      if (steps)       stepRows       = steps;
-      renderOutput(name, ingredients || [], steps || [], image);
-    }
-  }
+//     if (name) {
+//       uploadedImage  = image || null;
+//       if (ingredients) ingredientRows = ingredients;
+//       if (steps)       stepRows       = steps;
+//       renderOutput(name, ingredients || [], steps || [], image);
+//     }
+//   }
 
   /* ─── MODAL HELPERS ───────────────────────────────────────────── */
 
@@ -221,19 +221,59 @@
     }
   });
 
-  /* ─── IMAGE UPLOAD ────────────────────────────────────────────── */
+/* ─── IMAGE UPLOAD ────────────────────────────────────────────── */
 
-  document.getElementById('photoInput').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      uploadedImage = ev.target.result;
+const getImageDimensions = dataURL => new Promise(resolve => {
+  const img = new Image();
+  img.onload = () => resolve({ width: img.width, height: img.height });
+  img.src = dataURL;
+});
+
+document.getElementById('photoInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const objectUrl = window.URL.createObjectURL(file);
+
+  getImageDimensions(objectUrl).then(async ({ width, height }) => {
+    try {
+    
+      if (height < 800 && width < 1000) {
+        uploadedImage = objectUrl;
+        document.getElementById('previewImg').src = uploadedImage;
+        document.getElementById('uploadPreview').style.display = 'block';
+        return;
+      }
+
+      const image = await Jimp.read(objectUrl);
+
+      if (height > width) {
+        image.resize(Jimp.AUTO, 800);
+      } else {
+        image.resize(1000, Jimp.AUTO);
+      }
+
+      image.quality(82);
+
+      image.getBase64('image/jpeg', (err, resizedDataUrl) => {
+        if (err) {
+          console.error('Jimp resize error:', err);
+          uploadedImage = objectUrl;
+        } else {
+          uploadedImage = resizedDataUrl;
+        }
+        document.getElementById('previewImg').src = uploadedImage;
+        document.getElementById('uploadPreview').style.display = 'block';
+      });
+
+    } catch (err) {
+      console.error('Jimp could not process image:', err);
+      uploadedImage = objectUrl;
       document.getElementById('previewImg').src = uploadedImage;
       document.getElementById('uploadPreview').style.display = 'block';
-    };
-    reader.readAsDataURL(file);
+    }
   });
+});
 
   /* ─── NAVIGATION ──────────────────────────────────────────────── */
 
