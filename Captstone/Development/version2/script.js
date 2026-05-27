@@ -64,13 +64,16 @@
 
   let currentRecipe = 0;
 
-  /* ─── COVER – lock scroll on load ─────────────────── */
+  /* ─── lock scroll on load ─────────────────── */
   document.body.classList.add('cover-active');
   let coverDismissed = false;
 
-  /* ─── TABLE ROTATION ──────────────────────────────── */
+  /* ─── table rotation ──────────────────────────────── */
   let currentRotation = 0;
 
+
+  /* ─── cover peel ──────────────────────────────── */
+  /* ─── code from outside source because peel animation felt fitting for "cook book" feel ──────────────────────────────── */
   function getClipPath(p) {
     const points = [];
     points.push('0% 0%');
@@ -131,7 +134,7 @@
     });
   }
 
-  /* ─── COVER INTERACTIONS ──────────────────────────── */
+  /* ─── cover screen interaction ──────────────────────────── */
   cover.addEventListener('wheel', function (e) {
     if (e.deltaY > 0) dismissCover();
   });
@@ -148,12 +151,12 @@
     }
   });
 
-  /* ─── HIDE SCROLL CUE ─────────────────────────────── */
+  /* ─── hide scroll cue ─────────────────────────────── */
   window.addEventListener('scroll', function () {
     scrollCue.classList.toggle('hidden', window.scrollY > 50);
   });
 
-  /* ─── LAZY SUSAN ROTATION + TITLE + IMAGE ─────────── */
+  /* ─── lazy susan rotation, title, and image ─────────── */
   susan.addEventListener('click', function () {
     currentRotation += 90;
     susan.style.transform = 'rotate(' + currentRotation + 'deg)';
