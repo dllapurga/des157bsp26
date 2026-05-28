@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Capstone Project</title>
+  <!-- Normalize -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- AOS CSS — Library #1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <!-- My Styles -->
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <p class="modal-text">Please test the lazy susan rotation to cycle through the different recipes. Then feel free
+        to scroll through each recipe page and explore the contents.</p>
+    </div>
+  </div>
+
+  <div class="cover">
+    <h1 class="cover-title">Hinabi</h1>
+    <p class="cover-subtitle">Family Stories Preserved Through Recipes</p>
+    <div class="cover-scroll-cue">
+      <span>Scroll to enter</span>
+      <div class="cover-chevrons">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-shadow"></div>
+
+  <nav>
+    <a class="nav-logo" href="#">Hinabi</a>
+  </nav>
+
+
+  <section class="home">
+
+    <div class="table-wrap">
+      <div class="table-hint">click the table to rotate through recipes</div>
+      <div class="table-stage">
+        <img class="table-img" id="susan" src="images/lazysusan4.png" alt="Lazy Susan table with dishes"
+          title="Click to rotate" />
+        <img class="table-shadow" id="susan-shadow" src="images/lazysusan3.png" alt="" />
+        <div id="recipe-title" class="recipe-title">Chinese Egg Custard</div>
+      </div>
+
+    </div>
+
+    <img id="character-image" src="images/popocutout.png" alt="Character cutout" data-aos="fade-left"
+      data-aos-duration="1200" data-aos-delay="400" />
+    <img id="explanation-image" src="images/popoexplanation.png" alt="Character explanation" data-aos="fade-right"
+      data-aos-duration="1200" data-aos-delay="300" />
+    <img id="recipe-image" src="images/tartrecipe.png" alt="Recipe image" data-aos="fade-left" data-aos-duration="1200"
+      data-aos-delay="400" />
+    <video id="recipe-video" src="images/popo.mp4" data-aos="fade-right" data-aos-duration="1200" data-aos-delay="400"
+      controls muted playsinline></video>
+
+
+    <div class="scroll-cue">
+      <span>Scroll to view</span>
+      <div class="chevrons">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+  </section>
+
+
+  <div class="steps">
+    <img id="steps-image" src="images/eggtartsteps.png" alt="Recipe steps" data-aos="fade-up" data-aos-duration="800"
+      data-aos-delay="400">
+  </div>
+
+  <!-- AOS JS — Library #1 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <!-- GSAP — Library #2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="script.js" defer></script>
+
+</body>
+
+</html>

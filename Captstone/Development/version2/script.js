@@ -18,6 +18,8 @@
   const explanationImage = document.querySelector('#explanation-image');
   const recipeVideo = document.querySelector('#recipe-video');
   const stepsImage = document.querySelector('#steps-image');
+  const modalOverlay = document.querySelector('#modal-overlay');
+  const modalClose = document.querySelector('#modal-close');
 
 
   const recipes = [
@@ -185,5 +187,6 @@
       recipeVideo.classList.remove('hidden-fade');
     }, 180);
   });
+
 
 })();
