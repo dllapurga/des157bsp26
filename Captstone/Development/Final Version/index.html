@@ -25,7 +25,7 @@
 
   <div class="cover">
     <h1 class="cover-title">Hinabi</h1>
-    <p class="cover-subtitle">A letter to my kids on our family's story.<br>Preserving the voices of ancestors they may never have the chance to meet.</p>
+    <p class="cover-subtitle">A letter to my kids, nephews, and nieces on our family's story.<br>Preserving the voices of ancestors they may never have the chance to meet.</p>
     <div class="cover-scroll-cue">
       <span>Scroll to enter</span>
       <div class="cover-chevrons">
@@ -39,6 +39,7 @@
 
   <nav>
     <a class="nav-logo" href="#">Hinabi</a>
+    <p>A project by Derick Lapurga</p>
   </nav>
 
 
@@ -80,6 +81,25 @@
     <img id="steps-image" src="images/eggtartsteps.png" alt="Recipe steps" data-aos="fade-up" data-aos-duration="800"
       data-aos-delay="400">
   </div>
+
+
+  <!-- ─── Memory Wall ──────────────────────────────────── -->
+<section class="memory-section" data-aos="fade-up" data-aos-duration="900">
+  <h2 class="memory-heading">A moment at the table</h2>
+  <p class="memory-prompt">Tell me about the last time you had a special moment with a food of your culture.</p>
+
+  <div class="memory-form-wrap">
+    <textarea id="memory-input" class="memory-input" placeholder="Write your memory here…" maxlength="500" rows="4"></textarea>
+    <div class="memory-form-footer">
+      <!-- <span class="memory-char-count"><span id="char-count">0</span> / 500</span> -->
+      <button id="memory-submit" class="memory-submit">Share memory</button>
+    </div>
+  </div>
+
+  <div class="memory-wall" id="memory-wall"></div>
+</section>
+
+
 
   <!-- AOS JS — Library #1 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

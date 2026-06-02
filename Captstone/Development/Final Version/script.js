@@ -24,44 +24,44 @@
   /* ─── recipe data ──────────────────────────────────── */
   const recipes = [
     'Chinese Egg Custard',
-    'Dinuguan',
+    'Pinapaitan',
     'Chicken Adobo',
-    'Pinapaitan'
+    'Dinuguan'
   ];
 
   const recipeImages = [
     'images/tartrecipe.png',
-    'images/dinuguanrecipe.png',
+    'images/pinapaitanrecipe.png',
     'images/Adoborecipe.png',
-    'images/pinapaitanrecipe.png'
+   'images/dinuguanrecipe.png'
   ];
 
   const stepsImages = [
     'images/eggtartsteps.png',
-    'images/dinuguansteps.png',
+    'images/pinapaitansteps.png',
     'images/adobosteps.png',
-    'images/pinapaitansteps.png'
+  'images/dinuguansteps.png'
   ];
 
   const characterImages = [
     'images/popocutout.png',
-    'images/lolocutout.png',
+     'images/ondongcutout.png',
     'images/lolacutout.png',
-    'images/ondongcutout.png'
+  'images/lolocutout.png'
   ];
 
   const explanationImages = [
     'images/popoexplanation.png',
-    'images/loloexplanation.png',
+    'images/ondongexplanation.png',
     'images/lolaexplanation.png',
-    'images/ondongexplanation.png'
+  'images/loloexplanation.png'
   ];
 
   const videoSources = [
     'images/popo.mp4',
-    'images/lolo.mp4',
+     'images/ondong.mp4',
     'images/lola.mp4',
-    'images/ondong.mp4'
+  'images/lolo.mp4',
   ];
 
   let currentRecipe = 0;
@@ -213,4 +213,104 @@ susan.addEventListener('click', function (e) {
   }, 180);
 });
 
+
+
+
+
+
+/* ─── Memory Wall ──────────────────────────────────── */
+/* ─── Memory Wall ──────────────────────────────────── */
+const STORAGE_KEY = 'hinabi_memories';
+
+function loadMemories() {
+  const data = localStorage.getItem(STORAGE_KEY);
+  if (data) {
+    return JSON.parse(data);
+  }
+  return [];
+}
+
+function saveMemories(memories) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(memories));
+}
+
+function formatDate(ts) {
+  return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function createCard(memory) {
+  const card = document.createElement('div');
+  card.className = 'memory-card';
+  card.dataset.id = memory.id;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.className = 'memory-card-delete';
+  deleteBtn.title = 'Delete';
+  deleteBtn.textContent = '✕';
+
+  const text = document.createElement('p');
+  text.className = 'memory-card-text';
+  text.textContent = memory.text;
+
+  const date = document.createElement('div');
+  date.className = 'memory-card-date';
+  date.textContent = formatDate(memory.ts);
+
+  card.appendChild(deleteBtn);
+  card.appendChild(text);
+  card.appendChild(date);
+
+  deleteBtn.addEventListener('click', function () {
+    const memories = loadMemories();
+    const updated = [];
+    for (let i = 0; i < memories.length; i++) {
+      if (memories[i].id !== memory.id) {
+        updated.push(memories[i]);
+      }
+    }
+    saveMemories(updated);
+    card.remove();
+  });
+
+  return card;
+}
+
+function renderMemories() {
+  const wall = document.querySelector('#memory-wall');
+  const memories = loadMemories();
+  wall.innerHTML = '';
+  for (let i = 0; i < memories.length; i++) {
+    wall.appendChild(createCard(memories[i]));
+  }
+}
+
+const memoryInput  = document.querySelector('#memory-input');
+const memorySubmit = document.querySelector('#memory-submit');
+
+memoryInput.addEventListener('input', function () {
+  const charCount = document.querySelector('#char-count');
+  charCount.textContent = memoryInput.value.length;
+});
+
+memorySubmit.addEventListener('click', function () {
+  const text = memoryInput.value.trim();
+  if (text === '') return;
+
+  const memories = loadMemories();
+  const newMemory = {
+    id: Date.now(),
+    text: text,
+    ts: Date.now()
+  };
+  memories.unshift(newMemory);
+  saveMemories(memories);
+
+  const wall = document.querySelector('#memory-wall');
+  wall.insertBefore(createCard(newMemory), wall.firstChild);
+
+  memoryInput.value = '';
+  document.querySelector('#char-count').textContent = '0';
+});
+
+renderMemories();
 })();
