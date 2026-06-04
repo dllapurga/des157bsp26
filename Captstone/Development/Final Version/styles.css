@@ -310,6 +310,10 @@ nav-p{
   margin-top: -300px;
 }
 
+#recipe-video.video-ondong {
+  width: 320px; /* whatever size you want */
+}
+
 
 .back-to-top {
   position: fixed;
@@ -435,7 +439,7 @@ nav-p{
   transform: translateY(0);
 }
 
-/* ─── Memory Wall (cards) ─────────────────────────────── */
+
 
 .memory-wall {
   display: grid;
@@ -453,7 +457,7 @@ nav-p{
 }
 
 .memory-input {
-  color: rgb(57, 57, 57);  /* matches .memory-card-text */
+  color: rgb(57, 57, 57);  
 }
 
 .memory-input::placeholder {

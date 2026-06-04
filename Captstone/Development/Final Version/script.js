@@ -205,6 +205,8 @@ susan.addEventListener('click', function (e) {
     recipeVideo.load();
     recipeVideo.pause();
 
+    recipeVideo.classList.toggle('video-ondong', currentRecipe === 1);
+
     recipeTitle.classList.remove('hidden-fade');
     stepsImage.classList.remove('hidden-fade');
     characterImage.classList.remove('hidden-fade');
@@ -214,12 +216,6 @@ susan.addEventListener('click', function (e) {
 });
 
 
-
-
-
-
-/* ─── Memory Wall ──────────────────────────────────── */
-/* ─── Memory Wall ──────────────────────────────────── */
 const STORAGE_KEY = 'hinabi_memories';
 
 function loadMemories() {
