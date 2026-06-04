@@ -140,6 +140,7 @@ nav-p{
   align-items: center;
   overflow: visible;
   position: relative;
+  z-index: 1;
 }
 
 .table-wrap {
@@ -353,6 +354,8 @@ nav-p{
   margin: 0 auto 120px;
   padding: 0 24px;
   box-sizing: border-box;
+   position: relative;  /* ADD THIS */
+  z-index: 10;    
 }
 
 .memory-heading {

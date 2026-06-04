@@ -284,8 +284,8 @@ const memoryInput  = document.querySelector('#memory-input');
 const memorySubmit = document.querySelector('#memory-submit');
 
 memoryInput.addEventListener('input', function () {
-  const charCount = document.querySelector('#char-count');
-  charCount.textContent = memoryInput.value.length;
+  // const charCount = document.querySelector('#char-count');
+  // charCount.textContent = memoryInput.value.length;
 });
 
 memorySubmit.addEventListener('click', function () {
@@ -305,7 +305,7 @@ memorySubmit.addEventListener('click', function () {
   wall.insertBefore(createCard(newMemory), wall.firstChild);
 
   memoryInput.value = '';
-  document.querySelector('#char-count').textContent = '0';
+  // document.querySelector('#char-count').textContent = '0';
 });
 
 renderMemories();
