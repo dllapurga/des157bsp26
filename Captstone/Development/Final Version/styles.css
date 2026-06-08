@@ -116,7 +116,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
-  z-index: 5;
+  z-index: 100;
 }
 
 .nav-logo {
@@ -182,7 +182,7 @@ nav-p{
   top: 120px;
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
-  font-weight: 45px;
+  
   color: #ffffff;
   text-align: right;
   line-height: 1.4;

@@ -2,6 +2,9 @@
   'use strict';
   console.log('reading js');
 
+ var BACK_APP_ID = "4xkF7MWEI7skCzGH2tLeX2kfWdcOXb5dLcUA3Vp6"
+ var BACK_JS_KEY = "kgVbwFq689MIowHiE2xYUwoUfp9jHUnj6u0Klsv9"
+ var BACK_SERVER_URL = "https://parseapi.back4app.com"
   /* ─── AOS ───────────────────────────────────────────── */
   AOS.init({
     duration: 700,
@@ -206,6 +209,7 @@ susan.addEventListener('click', function (e) {
     recipeVideo.pause();
 
     recipeVideo.classList.toggle('video-ondong', currentRecipe === 1);
+    AOS.refresh();   
 
     recipeTitle.classList.remove('hidden-fade');
     stepsImage.classList.remove('hidden-fade');
@@ -216,97 +220,173 @@ susan.addEventListener('click', function (e) {
 });
 
 
-const STORAGE_KEY = 'hinabi_memories';
+// const STORAGE_KEY = 'hinabi_memories';
 
-function loadMemories() {
-  const data = localStorage.getItem(STORAGE_KEY);
-  if (data) {
-    return JSON.parse(data);
+// function loadMemories() {
+//   const data = localStorage.getItem(STORAGE_KEY);
+//   if (data) {
+//     return JSON.parse(data);
+//   }
+//   return [];
+// }
+
+// function saveMemories(memories) {
+//   localStorage.setItem(STORAGE_KEY, JSON.stringify(memories));
+// }
+
+// function formatDate(ts) {
+//   return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+// }
+
+// function createCard(memory) {
+//   const card = document.createElement('div');
+//   card.className = 'memory-card';
+//   card.dataset.id = memory.id;
+
+//   const deleteBtn = document.createElement('button');
+//   deleteBtn.className = 'memory-card-delete';
+//   deleteBtn.title = 'Delete';
+//   deleteBtn.textContent = '✕';
+
+//   const text = document.createElement('p');
+//   text.className = 'memory-card-text';
+//   text.textContent = memory.text;
+
+//   const date = document.createElement('div');
+//   date.className = 'memory-card-date';
+//   date.textContent = formatDate(memory.ts);
+
+//   card.appendChild(deleteBtn);
+//   card.appendChild(text);
+//   card.appendChild(date);
+
+//   deleteBtn.addEventListener('click', function () {
+//     const memories = loadMemories();
+//     const updated = [];
+//     for (let i = 0; i < memories.length; i++) {
+//       if (memories[i].id !== memory.id) {
+//         updated.push(memories[i]);
+//       }
+//     }
+//     saveMemories(updated);
+//     card.remove();
+//   });
+
+//   return card;
+// }
+
+// function renderMemories() {
+//   const wall = document.querySelector('#memory-wall');
+//   const memories = loadMemories();
+//   wall.innerHTML = '';
+//   for (let i = 0; i < memories.length; i++) {
+//     wall.appendChild(createCard(memories[i]));
+//   }
+// }
+
+// const memoryInput  = document.querySelector('#memory-input');
+// const memorySubmit = document.querySelector('#memory-submit');
+
+// memoryInput.addEventListener('input', function () {
+//   // const charCount = document.querySelector('#char-count');
+//   // charCount.textContent = memoryInput.value.length;
+// });
+
+// memorySubmit.addEventListener('click', function () {
+//   const text = memoryInput.value.trim();
+//   if (text === '') return;
+
+//   const memories = loadMemories();
+//   const newMemory = {
+//     id: Date.now(),
+//     text: text,
+//     ts: Date.now()
+//   };
+//   memories.unshift(newMemory);
+//   saveMemories(memories);
+
+//   const wall = document.querySelector('#memory-wall');
+//   wall.insertBefore(createCard(newMemory), wall.firstChild);
+
+//   memoryInput.value = '';
+//   // document.querySelector('#char-count').textContent = '0';
+// });
+
+// renderMemories();
+
+/* ─── Back4App / Parse setup ────────────────────────── */
+  Parse.initialize(BACK_APP_ID, BACK_JS_KEY);
+  Parse.serverURL = BACK_SERVER_URL;
+
+  const Memory = Parse.Object.extend('Memory');
+
+  /* ─── load memories from Back4App ──────────────────── */
+  async function loadMemories() {
+    const query = new Parse.Query(Memory);
+    query.descending('createdAt');
+    return await query.find();
   }
-  return [];
-}
 
-function saveMemories(memories) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(memories));
-}
+  function formatDate(ts) {
+    return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
 
-function formatDate(ts) {
-  return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
+  function createCard(parseObj) {
+    const card = document.createElement('div');
+    card.className = 'memory-card';
 
-function createCard(memory) {
-  const card = document.createElement('div');
-  card.className = 'memory-card';
-  card.dataset.id = memory.id;
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'memory-card-delete';
+    deleteBtn.title = 'Delete';
+    deleteBtn.textContent = '✕';
 
-  const deleteBtn = document.createElement('button');
-  deleteBtn.className = 'memory-card-delete';
-  deleteBtn.title = 'Delete';
-  deleteBtn.textContent = '✕';
+    const text = document.createElement('p');
+    text.className = 'memory-card-text';
+    text.textContent = parseObj.get('text');
 
-  const text = document.createElement('p');
-  text.className = 'memory-card-text';
-  text.textContent = memory.text;
+    const date = document.createElement('div');
+    date.className = 'memory-card-date';
+    date.textContent = formatDate(parseObj.createdAt);
 
-  const date = document.createElement('div');
-  date.className = 'memory-card-date';
-  date.textContent = formatDate(memory.ts);
+    card.appendChild(deleteBtn);
+    card.appendChild(text);
+    card.appendChild(date);
 
-  card.appendChild(deleteBtn);
-  card.appendChild(text);
-  card.appendChild(date);
+    deleteBtn.addEventListener('click', async function () {
+      await parseObj.destroy();
+      card.remove();
+    });
 
-  deleteBtn.addEventListener('click', function () {
-    const memories = loadMemories();
-    const updated = [];
-    for (let i = 0; i < memories.length; i++) {
-      if (memories[i].id !== memory.id) {
-        updated.push(memories[i]);
-      }
-    }
-    saveMemories(updated);
-    card.remove();
+    return card;
+  }
+
+  async function renderMemories() {
+    const wall = document.querySelector('#memory-wall');
+    wall.innerHTML = '';
+    const memories = await loadMemories();
+    memories.forEach(function (m) {
+      wall.appendChild(createCard(m));
+    });
+  }
+
+  const memoryInput  = document.querySelector('#memory-input');
+  const memorySubmit = document.querySelector('#memory-submit');
+
+  memoryInput.addEventListener('input', function () {});
+
+  memorySubmit.addEventListener('click', async function () {
+    const text = memoryInput.value.trim();
+    if (text === '') return;
+
+    const memory = new Memory();
+    memory.set('text', text);
+    const saved = await memory.save();
+
+    const wall = document.querySelector('#memory-wall');
+    wall.insertBefore(createCard(saved), wall.firstChild);
+
+    memoryInput.value = '';
   });
 
-  return card;
-}
-
-function renderMemories() {
-  const wall = document.querySelector('#memory-wall');
-  const memories = loadMemories();
-  wall.innerHTML = '';
-  for (let i = 0; i < memories.length; i++) {
-    wall.appendChild(createCard(memories[i]));
-  }
-}
-
-const memoryInput  = document.querySelector('#memory-input');
-const memorySubmit = document.querySelector('#memory-submit');
-
-memoryInput.addEventListener('input', function () {
-  // const charCount = document.querySelector('#char-count');
-  // charCount.textContent = memoryInput.value.length;
-});
-
-memorySubmit.addEventListener('click', function () {
-  const text = memoryInput.value.trim();
-  if (text === '') return;
-
-  const memories = loadMemories();
-  const newMemory = {
-    id: Date.now(),
-    text: text,
-    ts: Date.now()
-  };
-  memories.unshift(newMemory);
-  saveMemories(memories);
-
-  const wall = document.querySelector('#memory-wall');
-  wall.insertBefore(createCard(newMemory), wall.firstChild);
-
-  memoryInput.value = '';
-  // document.querySelector('#char-count').textContent = '0';
-});
-
-renderMemories();
+  renderMemories();
 })();
