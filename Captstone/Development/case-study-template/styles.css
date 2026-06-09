@@ -16,16 +16,16 @@ html {
 
 body {
     font-family: "Jost", Helvetica, sans-serif;
-    color: #333;
+    color: #0c1d7d;
 }
 nav {
     border-top: 2px solid #333333;
-    color:aquamarine
+    color:rgb(39, 42, 41)
 }
 nav ul li a {
     text-decoration: none;
     display: block;
-    color:cornflowerblue;
+    color:rgb(103, 149, 236);
     font-weight: bold;
     border-bottom: 2px solid #333;
     text-align: center;
@@ -34,7 +34,7 @@ nav ul li a {
 }
 
 header, footer {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(161, 184, 255);
 }
 
 header, section, footer {
@@ -42,7 +42,7 @@ header, section, footer {
 }
 
 section:nth-child(even){
-    background-color: aliceblue;
+    background-color: rgb(219, 238, 254);
 }
 
 .container {
